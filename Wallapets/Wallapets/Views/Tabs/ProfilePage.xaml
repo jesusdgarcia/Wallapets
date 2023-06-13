@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallapets.Views.Tabs.ProfilePage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             xmlns:model="clr-namespace:Wallapets.Model"
+             Title="Profile">
+    <ContentPage.BindingContext>
+        <model:clsProfileVM />
+    </ContentPage.BindingContext>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout Grid.Row="0" >
+            <Grid RowSpacing="6"
+                      ColumnSpacing="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.RowSpan="3"
+                        WidthRequest="80"
+                        HeightRequest="80">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="90,90,90,90" />
+                    </Border.StrokeShape>
+                    <Image Aspect="AspectFill"
+                           Source="{Binding UrlImagenProfile}"/>
+                </Border>
+                <Label Grid.Column="1"
+                           Grid.Row="0"
+                           Text="{Binding Nombre}"
+                           VerticalOptions="End"
+                           FontAttributes="Bold" />
+                <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding Email}"
+                           VerticalOptions="Center"/>
+            </Grid>
+
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <CollectionView ItemsSource="{Binding ListadoMascotasUser}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding MascotaSeleccionada}"
+                            EmptyView="No has subido ninguna mascota">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="{OnPlatform WinUI=4, Android=2}" 
+                                     VerticalItemSpacing="5"
+                                     HorizontalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border MinimumWidthRequest="{OnPlatform WinUI=150, Android=175}"
+                                MinimumHeightRequest="{OnPlatform WinUI=550, Android=250}"
+                                Stroke="Transparent">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15,15,15,15" />
+                            </Border.StrokeShape>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{OnPlatform WinUI=500, Android=200}"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Stroke="Transparent"
+                                        Grid.Row="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="15,15,15,15" />
+                                    </Border.StrokeShape>
+                                    <Image Aspect="AspectFill"
+                                           Source="{Binding UrlImagen}"/>
+                                </Border>
+                                <Label Grid.Column="1"
+                                       Grid.Row="1"
+                                       Text="{Binding Titulo}"
+                                       VerticalOptions="Center"
+                                       Margin="20,5,0,0"
+                                       FontAttributes="Bold" />
+                            </Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal"></VisualState>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#DFD8F7"></Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <VerticalStackLayout Grid.Row="2">
+            <Button
+                    Text="Logout"
+                    Command="{Binding LogoutCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

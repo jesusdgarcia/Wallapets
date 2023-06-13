@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Wallapets.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Wallapets"
+    xmlns:views="clr-namespace:Wallapets.Views"
+    xmlns:tabs="clr-namespace:Wallapets.Views.Tabs"
+    Shell.FlyoutBehavior="Disabled"
+    x:Name="ShellView">
+    
+    <ShellContent 
+        Route="Login" 
+        x:Name="LoginPage"
+        ContentTemplate="{DataTemplate views:LoginPage}" />
+
+    <ShellContent 
+        Route="Register" 
+        x:Name="RegisterPage"
+        ContentTemplate="{DataTemplate views:RegisterPage}" />
+
+    <TabBar>
+        <ShellContent
+                Route="Dashboard"
+                x:Name="DashboardPage"
+                Icon="home.png"
+                ContentTemplate="{DataTemplate tabs:DashboardPage}" />
+        <ShellContent
+                x:Name="CreatePage"
+                Icon="plus.png"
+                ContentTemplate="{DataTemplate tabs:CreatePage}" />
+        <ShellContent
+                Route="Chat"
+                x:Name="ChatPage"
+                Icon="messages.png"
+                ContentTemplate="{DataTemplate tabs:ChatPage}" />
+        <ShellContent
+                x:Name="ProfilePage"
+                Icon="user.png"
+                ContentTemplate="{DataTemplate tabs:ProfilePage}" />
+    </TabBar>
+
+</Shell>

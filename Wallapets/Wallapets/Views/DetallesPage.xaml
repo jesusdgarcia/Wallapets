@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallapets.Views.DetallesPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="{OnPlatform WinUI=True, Android=False}"
+             Title="DetallesPage">
+    <ScrollView>
+        <VerticalStackLayout Margin="15" HorizontalOptions="{OnPlatform WinUI=Center}">
+            <Border 
+                WidthRequest="{OnPlatform WinUI=400, Android=300}"
+                HeightRequest="{OnPlatform WinUI=500, Android=400}"
+                Stroke="Transparent"
+                HorizontalOptions="{OnPlatform WinUI=Start}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15,15,15,15" />
+                </Border.StrokeShape>
+                <Image 
+                    Aspect="AspectFill"
+                    Source="{Binding Mascota.UrlImagen}"/>
+            </Border>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Título"/>
+            <Label
+                HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                Text="{Binding Mascota.Titulo}"
+                VerticalOptions="FillAndExpand"/>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Descripción"/>
+            <Label
+                HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                Text="{Binding Mascota.Descripcion}"
+                WidthRequest="{OnPlatform WinUI=400}"
+                VerticalOptions="FillAndExpand"/>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Provincia"/>
+            <Label
+                HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                Text="{Binding Mascota.Provincia}"
+                VerticalOptions="FillAndExpand"/>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Localidad"/>
+            <Label
+                HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                Text="{Binding Mascota.Localidad}"
+                VerticalOptions="FillAndExpand"/>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Especie"/>
+            <Label
+                HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                Text="{Binding Mascota.Tipo}"
+                VerticalOptions="FillAndExpand"/>
+            
+            <Button 
+                Margin="0,20,0,0"
+                BackgroundColor="#8E7ADD"
+                CornerRadius="15"
+                Text="Enviar un mensaje"
+                HorizontalOptions="{OnPlatform WinUI=Start}"
+                Command="{Binding EnviarMensajeCommand}"
+                WidthRequest="{OnPlatform WinUI=400}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

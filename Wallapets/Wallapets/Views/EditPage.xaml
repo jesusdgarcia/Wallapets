@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallapets.Views.EditPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="{OnPlatform WinUI=True, Android=False}"
+             Title="EditPage">
+    <ScrollView>
+        <VerticalStackLayout Margin="15" HorizontalOptions="{OnPlatform WinUI=Center}">
+            <Image 
+                WidthRequest="{OnPlatform WinUI=400, Android=300}"
+                HeightRequest="{OnPlatform WinUI=400, Android=300}"
+                Source="{Binding ImgSource}"/>
+            <Button
+                Margin="0,20,0,0"
+                BackgroundColor="#8E7ADD"
+                CornerRadius="15"
+                Text="Elige imagen"
+                Command="{Binding PickImgCommand}"/>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Título"/>
+            <Border Stroke="Transparent"
+                    Margin="0,10,0,0"
+                    HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                    WidthRequest="{OnPlatform WinUI=400}"
+                    BackgroundColor="#F7F7F8">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15,15,15,15" />
+                </Border.StrokeShape>
+                <Entry
+                    HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                    Text="{Binding Mascota.Titulo}"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="{OnPlatform WinUI=400}"/>
+            </Border>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Descripción"/>
+            <Border Stroke="Transparent"
+                    Margin="0,10,0,0"
+                    HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                    WidthRequest="{OnPlatform WinUI=400}"
+                    BackgroundColor="#F7F7F8">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15,15,15,15" />
+                </Border.StrokeShape>
+                <Entry
+                    HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                    Text="{Binding Mascota.Descripcion}"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="{OnPlatform WinUI=400}"/>
+            </Border>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Seleccione una provincia"/>
+            <Border Stroke="Transparent"
+                    Margin="0,10,0,0"
+                    WidthRequest="{OnPlatform WinUI=400}"
+                    HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                    BackgroundColor="#F7F7F8">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15,15,15,15" />
+                </Border.StrokeShape>
+                <Picker
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Provincias}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding ProvinciaSelecionada}"
+                    WidthRequest="{OnPlatform WinUI=400}"/>
+            </Border>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Localidad"/>
+            <Border Stroke="Transparent"
+                    Margin="0,10,0,0"
+                    HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                    WidthRequest="{OnPlatform WinUI=400}"
+                    BackgroundColor="#F7F7F8">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15,15,15,15" />
+                </Border.StrokeShape>
+                <Entry
+                    HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                    Text="{Binding Mascota.Localidad}"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="{OnPlatform WinUI=400}"/>
+            </Border>
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="StartAndExpand"
+                TextColor="#8E7ADD" 
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Seleccione una especie"/>
+            <Border Stroke="Transparent"
+                    Margin="0,10,0,0"
+                    HorizontalOptions="{OnPlatform Android=FillAndExpand, WinUI=Start}"
+                    WidthRequest="{OnPlatform WinUI=400}"
+                    BackgroundColor="#F7F7F8">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15,15,15,15" />
+                </Border.StrokeShape>
+                <Picker
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Tipos}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding TipoSelecionada}"
+                    WidthRequest="{OnPlatform WinUI=400}"/>
+            </Border>
+            <Button 
+                Margin="0,20,0,0"
+                BackgroundColor="#8E7ADD"
+                CornerRadius="15"
+                Text="Actualizar"
+                Command="{Binding GuardarMascotaCommand}"/>
+            <Button 
+                Margin="0,20,0,0"
+                BackgroundColor="#8E7ADD"
+                CornerRadius="15"
+                Text="Borrar"
+                Command="{Binding BorrarMascotaCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

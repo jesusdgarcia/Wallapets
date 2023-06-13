@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallapets.Views.RegisterPage"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             Title="RegisterPage">
+    <Shell.BackButtonBehavior >
+        <BackButtonBehavior Command="{Binding BackCommand}" IsVisible="True" IsEnabled="True"/>
+    </Shell.BackButtonBehavior>
+    <ScrollView>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                Source="moradito.png"
+                Aspect="AspectFit"
+                WidthRequest="150"
+                HeightRequest="150"
+                HorizontalOptions="Start"/>
+
+            <Label
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="26"
+                HorizontalOptions="StartAndExpand"
+                Text="Registrarse"
+                TextColor="#8E7ADD" />
+            <Label
+                Grid.Row="2"
+                Margin="0,10,0,0"
+                FontSize="16"
+                HorizontalOptions="StartAndExpand"
+                Text="A tan solo un click de unirte y encontrar a tu nuevo compañero de vida o a un nuevo dueño"/>
+            <StackLayout Grid.Row="3" HorizontalOptions="{OnPlatform WinUI=Center}">
+                <Grid
+                    Padding="20,10,20,0"
+                    HorizontalOptions="FillAndExpand"
+                    RowSpacing="20"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Margin="0,20,0,0"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Nombre"/>
+                    <Border Stroke="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        Grid.Row="1"
+                        WidthRequest="{OnPlatform WinUI=400}"
+                        BackgroundColor="#F7F7F8">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15,15,15,15" />
+                        </Border.StrokeShape>
+                        <Entry HorizontalOptions="FillAndExpand"
+                               Text="{Binding Name}"
+                               WidthRequest="{OnPlatform WinUI=400}"
+                               VerticalOptions="FillAndExpand"/>
+                    </Border>
+                    <Label
+                        Grid.Row="2"
+                        Margin="0,20,0,0"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Correo Electronico"/>
+                    <Border Stroke="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        Grid.Row="3"
+                        WidthRequest="{OnPlatform WinUI=400}"
+                        BackgroundColor="#F7F7F8">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15,15,15,15" />
+                        </Border.StrokeShape>
+                        <Entry HorizontalOptions="FillAndExpand"
+                               Text="{Binding Email}"
+                               WidthRequest="{OnPlatform WinUI=400}"
+                               VerticalOptions="FillAndExpand"/>
+                    </Border>
+                    <Label
+                        Grid.Row="4"
+                        Margin="0,20,0,0"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Contraseña"/>
+                    <Border Stroke="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        Grid.Row="5"
+                        WidthRequest="{OnPlatform WinUI=400}"
+                        BackgroundColor="#F7F7F8">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15,15,15,15" />
+                        </Border.StrokeShape>
+                        <Entry HorizontalOptions="FillAndExpand"
+                               IsPassword="True"
+                               Text="{Binding Password}"
+                               WidthRequest="{OnPlatform WinUI=400}"
+                               VerticalOptions="FillAndExpand"/>
+                    </Border>
+                    <Button
+                        Grid.Row="6"
+                        BackgroundColor="#8E7ADD"
+                        Margin="0,20,0,0"
+                        Command="{Binding RegisterCommand}"
+                        CornerRadius="15"
+                        Text="REGISTRAR" />
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

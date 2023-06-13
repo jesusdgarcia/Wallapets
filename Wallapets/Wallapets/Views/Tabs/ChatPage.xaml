@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallapets.Views.Tabs.ChatPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             xmlns:model="clr-namespace:Wallapets.Model"
+             Title="Chat">
+    <ContentPage.BindingContext>
+        <model:clsChatVM />
+    </ContentPage.BindingContext>
+    <ScrollView Margin="7">
+        <CollectionView ItemsSource="{Binding ListadoChats}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding ChatSeleccionado}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowSpacing="5"
+                          ColumnSpacing="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border Stroke="Transparent"
+                                Grid.RowSpan="3"
+                                WidthRequest="100"
+                                HeightRequest="100">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15,15,15,15" />
+                            </Border.StrokeShape>
+                            <Image Aspect="AspectFill"
+                                   Source="{Binding UrlImagenMascota}"/>
+                        </Border>
+                        <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{Binding Titulo}"
+                                       VerticalOptions="Center"
+                                       FontSize="Small"/>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal"></VisualState>
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#DFD8F7"></Setter>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>

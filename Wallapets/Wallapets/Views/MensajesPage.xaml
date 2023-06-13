@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallapets.Views.MensajesPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="{OnPlatform WinUI=True, Android=False}"
+             xmlns:model="clr-namespace:Wallapets.Model"
+             xmlns:templates="clr-namespace:Wallapets.Resources.Styles.Template"
+             Title="MensajesPage">
+    <ContentPage.BindingContext>
+        <model:clsMensajesVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="SenderMessageItemTemplate">
+                <templates:SenderChatMessageItemTemplate />
+            </DataTemplate>
+
+            <DataTemplate x:Key="ReceiverMessageItemTemplate">
+                <templates:ReceiverChatMessageItemTemplate />
+            </DataTemplate>
+
+            <templates:MessageDataTemplateSelector 
+                x:Key="MessageDataTemplateSelector"             
+                SenderMessageTemplate="{StaticResource SenderMessageItemTemplate}"    
+                ReceiverMessageTemplate="{StaticResource ReceiverMessageItemTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <HorizontalStackLayout Grid.Row="0" >
+            <Grid RowSpacing="6"
+                  ColumnSpacing="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.RowSpan="3"
+                            WidthRequest="80"
+                            HeightRequest="80">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15,15,15,15" />
+                    </Border.StrokeShape>
+                    <Image Aspect="AspectFill"
+                           Source="{Binding Chat.UrlImagenMascota}"/>
+                </Border>
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding Chat.Titulo}"
+                       VerticalOptions="Center"/>
+            </Grid>
+        </HorizontalStackLayout>
+        <!--<ScrollView Grid.Row="1">-->
+        <CollectionView
+                Grid.Row="1"
+                x:Name="ListadoMensajes"
+                ItemsSource="{Binding ListadoMensajes}"
+                ItemTemplate="{StaticResource MessageDataTemplateSelector}"
+                EmptyView="No hay mensajes que mostrar"
+                SelectionMode="None" />
+        <!--</ScrollView>-->
+        <StackLayout Orientation="Horizontal" Grid.Row="2">
+            <Border Stroke="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="#F7F7F8">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15,15,15,15" />
+                </Border.StrokeShape>
+                <Entry Placeholder="Escribe algo..."
+                   Text="{Binding Texto}"
+                   Keyboard="Chat"
+                   VerticalOptions="Center"
+                   HeightRequest="50"
+                   HorizontalOptions="FillAndExpand"/>
+            </Border>
+            <Border Stroke="Transparent">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+                <ImageButton
+                    BackgroundColor="#8E7ADD"
+                    WidthRequest="45"
+                    HeightRequest="45"
+                    Source="send.png"
+                    Command="{Binding EnviarMensajeCommand}"
+                    Aspect="AspectFill"/>
+            </Border>
+        </StackLayout>
+    </Grid>
+</ContentPage>

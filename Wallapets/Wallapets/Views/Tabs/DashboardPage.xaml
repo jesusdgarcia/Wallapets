@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallapets.Views.Tabs.DashboardPage"
+             xmlns:model="clr-namespace:Wallapets.Model"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             x:Name="Dashboard"
+             Title="Home">
+    <ContentPage.BindingContext>
+        <model:clsDashboardVM />
+    </ContentPage.BindingContext>
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding ActualizarListadoCommand}">
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{OnPlatform WinUI=75, Android=60}" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <HorizontalStackLayout
+                HorizontalOptions="StartAndExpand"
+                Margin="5,10,5,0"
+                Grid.Row="0" >
+                <Border Stroke="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{OnPlatform Android=#F7F7F8, WinUI=Transparent}"
+                    Margin="0,0,10,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="{OnPlatform Android=15}" />
+                    </Border.StrokeShape>
+                    <Picker
+                    Title="Provincia"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Provincias}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding ProvinciaSelecionada}"
+                    WidthRequest="{OnPlatform WinUI=150, Android=120}"/>
+                </Border>
+                <Border Stroke="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{OnPlatform Android=#F7F7F8, WinUI=Transparent}"
+                    Margin="0,0,10,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="{OnPlatform Android=15}" />
+                    </Border.StrokeShape>
+                    <Picker
+                    Title="Especie"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Tipos}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding TipoSelecionada}"
+                    WidthRequest="{OnPlatform WinUI=150, Android=120}"/>
+                </Border>
+                <Button 
+                    Margin="0,0,0,0"
+                    BackgroundColor="#8E7ADD"
+                    CornerRadius="15"
+                    VerticalOptions="Center"
+                    WidthRequest="{OnPlatform WinUI=150, Android=120}"
+                    Text="Buscar"
+                    Command="{Binding BuscarCommand}"/>
+            </HorizontalStackLayout>
+            <ScrollView Grid.Row="1">
+                <CollectionView ItemsSource="{Binding ListadoMascotas}"
+                                SelectionMode="Single"
+                                EmptyView="No has subido ninguna mascota"
+                                SelectedItem="{Binding MascotaSeleccionada}"
+                                Margin="5"
+                                RemainingItemsThreshold="0"
+                                RemainingItemsThresholdReachedCommand="{Binding CargarMasItemsCommand}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="{OnPlatform WinUI=4, Android=2}" 
+                                         VerticalItemSpacing="5"
+                                         HorizontalItemSpacing="5"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border MinimumWidthRequest="{OnPlatform WinUI=150, Android=175}"
+                                    MinimumHeightRequest="{OnPlatform WinUI=550, Android=250}"
+                                    Stroke="Transparent">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="15,15,15,15" />
+                                </Border.StrokeShape>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{OnPlatform WinUI=500, Android=200}"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Stroke="Transparent"
+                                        Grid.Row="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="15,15,15,15" />
+                                        </Border.StrokeShape>
+                                        <Image Aspect="AspectFill"
+                                           
+                                           Source="{Binding UrlImagen}"/>
+                                    </Border>
+                                    <Label Grid.Column="1"
+                                       Grid.Row="1"
+                                       Text="{Binding Titulo}"
+                                       VerticalOptions="Center"
+                                       Margin="20,5,0,0"
+                                       FontAttributes="Bold" />
+                                </Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal"></VisualState>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#DFD8F7"></Setter>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Border>
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </ScrollView>
+        </Grid>
+    </RefreshView>
+</ContentPage>
